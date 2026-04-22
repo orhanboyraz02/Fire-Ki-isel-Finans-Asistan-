@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>FIRE Asistanı | Finansal Özgürlük</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>FIRE & Kişisel Finans Asistanı | Finansal Özgürlük</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
         body { background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); padding: 16px 12px 100px 12px; min-height: 100vh; }
@@ -48,7 +48,6 @@
         .panel.active-panel { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         
-        .hidden { display: none; }
         .footer { text-align: center; font-size: 0.65rem; color: #8a9a8e; margin-top: 20px; padding: 12px; border-top: 1px solid #ddd; }
         .todo-checkbox { width: 20px; height: 20px; margin-right: 10px; cursor: pointer; }
         .completed { text-decoration: line-through; opacity: 0.6; }
@@ -67,17 +66,17 @@
         <div class="card-title" style="color:rgba(255,255,255,0.8);">🚀 Tam Sürüme Geçin</div>
         <div style="font-size:1.8rem; font-weight:800;">99 ₺</div>
         <div style="font-size:0.7rem;">Aylık | 990 ₺ Yıllık | 2.499 ₺ Ömür Boyu</div>
-        <button class="btn-whatsapp" onclick="goToWhatsApp()">📲 WhatsApp ile Satın Al</button>
+        <button class="btn-whatsapp" id="whatsappBuyBtn">📲 WhatsApp ile Satın Al</button>
         <p style="font-size:0.65rem; margin-top:8px; opacity:0.8;">7 gün ücretsiz deneme</p>
     </div>
 
     <!-- FIRE ANA KART -->
-    <div class="fire-card">
+    <div class="fire-card" id="fireCard">
         <div style="display:flex; justify-content:center; gap:8px; margin-bottom:12px;">
-            <button class="fire-type-btn" data-fire="lean" style="background:transparent; border:1px solid white; padding:4px 12px; border-radius:20px; color:white;">🥉 Lean</button>
-            <button class="fire-type-btn" data-fire="regular" style="background:transparent; border:1px solid white; padding:4px 12px; border-radius:20px; color:white;">🥈 Regular</button>
-            <button class="fire-type-btn" data-fire="fat" style="background:transparent; border:1px solid white; padding:4px 12px; border-radius:20px; color:white;">🥇 Fat</button>
-            <button class="fire-type-btn" data-fire="barista" style="background:transparent; border:1px solid white; padding:4px 12px; border-radius:20px; color:white;">💎 Barista</button>
+            <button class="fire-type-btn" data-fire="lean" style="background:rgba(255,255,255,0.2); border:none; padding:6px 12px; border-radius:20px; color:white; font-weight:bold;">🥉 Lean</button>
+            <button class="fire-type-btn" data-fire="regular" style="background:rgba(255,255,255,0.2); border:none; padding:6px 12px; border-radius:20px; color:white; font-weight:bold;">🥈 Regular</button>
+            <button class="fire-type-btn" data-fire="fat" style="background:rgba(255,255,255,0.2); border:none; padding:6px 12px; border-radius:20px; color:white; font-weight:bold;">🥇 Fat</button>
+            <button class="fire-type-btn" data-fire="barista" style="background:rgba(255,255,255,0.2); border:none; padding:6px 12px; border-radius:20px; color:white; font-weight:bold;">💎 Barista</button>
         </div>
         <div class="fire-years" id="fireYearsLeft">--</div>
         <div>yıl sonra FIRE olacaksın</div>
@@ -258,25 +257,28 @@
             <button class="btn-secondary" onclick="exportData()">📤 Dışa Aktar (JSON)</button>
             <input type="file" id="importFile" accept=".json" style="margin:10px 0;">
             <button class="btn-secondary" onclick="importData()">📥 İçe Aktar</button>
-            <button class="btn-danger" onclick="resetAllData()" style="margin-top:10px; background:#ffebee; color:#c62828; padding:10px; border-radius:40px; width:100%; border:none;">🗑️ Tüm Verileri Sıfırla</button>
+            <button class="btn-secondary" onclick="resetAllData()" style="margin-top:10px; background:#ffebee; color:#c62828;">🗑️ Tüm Verileri Sıfırla</button>
         </div>
     </div>
 
-    <div class="footer">© 2025 FIRE & Kişisel Finans Asistanı | Geliştirici: CFO.Orhan Boyraz |Websitem: https://anadolunetwork.tr orhanboyraz0216@gmail.com GSM: 0541 866 0202<br>🔥 4 FIRE Çeşidi | Pasif Gelir | FİRE Hesaplama | Hedefler | Portföy | Günlük Planlama</div>
+    <div class="footer">© 2025 FIRE & Kişisel Finans Asistanı | Geliştirici: CFO. Orhan Boyraz |Websitem: https://anadolunetwork.tr orhanboyraz0216@gmail.com GSM: 0541 866 0202<br>🔥 4 FIRE Çeşidi | Pasif Gelir | Bütçem | Hedefler | Portföy | Günlük Planlama</div>
 </div>
 
 <!-- WhatsApp Float Button -->
-<button class="whatsapp-float" onclick="goToWhatsApp()">📲</button>
+<button class="whatsapp-float" id="whatsappFloatBtn">📲</button>
 
 <script>
-    // WhatsApp Yönlendirme
+    // ============ WHATSAPP YÖNLENDİRME ============
     const WHATSAPP_NUMBER = "905418660202";
     function goToWhatsApp() {
-        let message = encodeURIComponent("Merhaba, FIRE Asistanı tam sürüm satın almak istiyorum.");
+        let message = encodeURIComponent("Merhaba, FIRE Asistanı tam sürüm satın almak istiyorum. Fiyatlar ve ödeme seçenekleri hakkında bilgi alabilir miyim?");
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
     }
-
-    // ============ KULLANICI VERİLERİ (LocalStorage) ============
+    
+    document.getElementById("whatsappBuyBtn").onclick = goToWhatsApp;
+    document.getElementById("whatsappFloatBtn").onclick = goToWhatsApp;
+    
+    // ============ KULLANICI VERİLERİ ============
     let selectedFireType = "lean";
     
     let userData = {
@@ -292,23 +294,23 @@
         currentSavings: 250000,
         returnRate: 8,
         emergencyFund: 60000,
-        fireTargets: { Lean Fire: 25000, Regular Fire: 50000, Fat Fire: 100000, Barista Fire: 20000 },
+        fireTargets: { Lean fire: 25000, Regular fire: 50000, Fat fire: 100000, Barista fire: 20000 },
         withdrawalRate: 4
     };
     
     // Veriyi yükle/kaydet
     function loadData() {
-        let saved = localStorage.getItem("fire_assistant_data");
+        let saved = localStorage.getItem("fire_assistant_data_v2");
         if(saved) {
             try {
                 let parsed = JSON.parse(saved);
                 userData = parsed;
-            } catch(e) {}
+            } catch(e) { console.log("Veri yüklenemedi"); }
         }
         updateUI();
     }
     function saveData() {
-        localStorage.setItem("fire_assistant_data", JSON.stringify(userData));
+        localStorage.setItem("fire_assistant_data_v2", JSON.stringify(userData));
     }
     
     // Hesaplamalar
@@ -325,13 +327,20 @@
         let targetMonthly = userData.fireTargets[selectedFireType];
         let targetFire = (targetMonthly * 12) / (userData.withdrawalRate/100);
         let current = userData.currentSavings;
-        let years = 0, proj = current;
+        let years = 0;
+        let proj = current;
         let annualInvest = monthlyInvest * 12;
         let rate = userData.returnRate / 100;
         if(annualInvest > 0 && targetFire > current) {
-            while(proj < targetFire && years < 50) { proj = proj * (1 + rate) + annualInvest; years++; }
-        } else if(current >= targetFire) years = 0;
-        else years = 999;
+            while(proj < targetFire && years < 50) { 
+                proj = proj * (1 + rate) + annualInvest; 
+                years++; 
+            }
+        } else if(current >= targetFire) {
+            years = 0;
+        } else {
+            years = 999;
+        }
         let percent = Math.min(100, (current / targetFire) * 100);
         return { monthlyNet, monthlyInvest, targetFire, years, percent, passiveInc, expense, activeInc };
     }
@@ -339,30 +348,35 @@
     // UI Güncelleme
     function updateUI() {
         let fire = calculateFIRE();
-        document.getElementById("fireYearsLeft").innerHTML = fire.years===0?"0 (Tebrikler! 🎉)":(fire.years>=50?"50+":fire.years);
-        document.getElementById("firePercent").innerHTML = fire.percent.toFixed(1)+"%";
-        document.getElementById("fireProgressBar").style.width = fire.percent+"%";
-        document.getElementById("monthlyNet").innerHTML = fire.monthlyNet.toLocaleString('tr-TR')+" ₺";
-        document.getElementById("totalSavings").innerHTML = userData.currentSavings.toLocaleString('tr-TR')+" ₺";
-        document.getElementById("passiveTotal").innerHTML = fire.passiveInc.toLocaleString('tr-TR')+" ₺";
-        document.getElementById("monthlyInvest").innerHTML = fire.monthlyInvest.toLocaleString('tr-TR')+" ₺";
-        document.getElementById("fireTarget").innerHTML = Math.round(fire.targetFire).toLocaleString('tr-TR')+" ₺";
-        document.getElementById("emergencyDisplay").innerHTML = userData.emergencyFund.toLocaleString('tr-TR')+" ₺";
+        document.getElementById("fireYearsLeft").innerHTML = fire.years===0 ? "0 (Tebrikler! 🎉)" : (fire.years>=50 ? "50+" : fire.years);
+        document.getElementById("firePercent").innerHTML = fire.percent.toFixed(1) + "%";
+        document.getElementById("fireProgressBar").style.width = fire.percent + "%";
+        document.getElementById("monthlyNet").innerHTML = fire.monthlyNet.toLocaleString('tr-TR') + " ₺";
+        document.getElementById("totalSavings").innerHTML = userData.currentSavings.toLocaleString('tr-TR') + " ₺";
+        document.getElementById("passiveTotal").innerHTML = fire.passiveInc.toLocaleString('tr-TR') + " ₺";
+        document.getElementById("monthlyInvest").innerHTML = fire.monthlyInvest.toLocaleString('tr-TR') + " ₺";
+        document.getElementById("fireTarget").innerHTML = Math.round(fire.targetFire).toLocaleString('tr-TR') + " ₺";
+        document.getElementById("emergencyDisplay").innerHTML = userData.emergencyFund.toLocaleString('tr-TR') + " ₺";
         
         let recent = [...userData.incomes.slice(-2), ...userData.expenses.slice(-2)];
+        recent.sort((a,b) => new Date(b.date) - new Date(a.date));
         document.getElementById("recentTransactions").innerHTML = recent.map(t=>`<div class="list-item">${t.desc}: ${t.amount.toLocaleString('tr-TR')} ₺</div>`).join("") || "İşlem yok";
         
         let incompleteTodos = userData.todos.filter(t=>!t.completed).length;
         document.getElementById("todayTasksCount").innerHTML = incompleteTodos + " görev kaldı";
         
-        let tip = fire.passiveInc > fire.expense*0.7 ? "🎉 Pasif gelirin giderlerinin çoğunu karşılıyor!" : (fire.monthlyInvest<5000 ? "💡 Aylık yatırımını artır!" : "🚀 İyi gidiyorsun, devam et!");
+        let tip = "";
+        if(fire.passiveInc > fire.expense*0.7) tip = "🎉 Pasif gelirin giderlerinin çoğunu karşılıyor!";
+        else if(fire.monthlyInvest < 5000) tip = "💡 Aylık yatırımını artırarak FIRE'a daha hızlı ulaşabilirsin!";
+        else if(fire.percent > 70) tip = "🚀 Çok yaklaştın! Hedefine kısa sürede ulaşacaksın!";
+        else tip = "📈 Düzenli yatırım ile FIRE hedefine ulaşabilirsin!";
         document.getElementById("fireTip").innerHTML = tip;
         
         // Gelir Listesi
-        document.getElementById("gelirListesi").innerHTML = userData.incomes.map((x,i)=>`<div class="list-item">${x.desc} <span class="income">+${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteIncome(${i})">❌</button></div>`).join("") || "Gelir yok";
+        document.getElementById("gelirListesi").innerHTML = userData.incomes.map((x,i)=>`<div class="list-item">${x.desc} <span class="income">+${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteIncome(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div>`).join("") || "Gelir yok";
         
         // Gider Listesi
-        document.getElementById("giderListesi").innerHTML = userData.expenses.map((x,i)=>`<div class="list-item">${x.desc} <span class="expense">-${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteExpense(${i})">❌</button></div>`).join("") || "Gider yok";
+        document.getElementById("giderListesi").innerHTML = userData.expenses.map((x,i)=>`<div class="list-item">${x.desc} <span class="expense">-${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteExpense(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div>`).join("") || "Gider yok";
         
         // Pasif Gelir Inputları
         document.getElementById("rentalIncome").value = userData.passive.rental;
@@ -372,22 +386,22 @@
         document.getElementById("otherPassive").value = userData.passive.other;
         
         // Borç/Alacak
-        document.getElementById("debtList").innerHTML = userData.debts.map((x,i)=>`<div class="list-item">${x.name} <span>${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteDebt(${i})">❌</button></div>`).join("") || "Borç yok";
-        document.getElementById("receivableList").innerHTML = userData.receivables.map((x,i)=>`<div class="list-item">${x.name} <span>${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteReceivable(${i})">❌</button></div>`).join("") || "Alacak yok";
+        document.getElementById("debtList").innerHTML = userData.debts.map((x,i)=>`<div class="list-item">${x.name} <span>${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteDebt(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div>`).join("") || "Borç yok";
+        document.getElementById("receivableList").innerHTML = userData.receivables.map((x,i)=>`<div class="list-item">${x.name} <span>${x.amount.toLocaleString('tr-TR')} ₺</span> <button onclick="deleteReceivable(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div>`).join("") || "Alacak yok";
         
         // Rutinler
-        document.getElementById("routineList").innerHTML = userData.routines.map((x,i)=>`<div class="list-item">✅ ${x} <button onclick="deleteRoutine(${i})">❌</button></div>`).join("") || "Rutin yok";
+        document.getElementById("routineList").innerHTML = userData.routines.map((x,i)=>`<div class="list-item">✅ ${x} <button onclick="deleteRoutine(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div>`).join("") || "Rutin yok";
         
         // Yapılacaklar
-        document.getElementById("todoList").innerHTML = userData.todos.map((x,i)=>`<div class="list-item"><input type="checkbox" class="todo-checkbox" ${x.completed?"checked":""} onchange="toggleTodo(${i})"><span class="${x.completed?'completed':''}">${x.text}</span><button onclick="deleteTodo(${i})">❌</button></div>`).join("") || "Görev yok";
+        document.getElementById("todoList").innerHTML = userData.todos.map((x,i)=>`<div class="list-item"><input type="checkbox" class="todo-checkbox" ${x.completed?"checked":""} onchange="toggleTodo(${i})"><span class="${x.completed?'completed':''}">${x.text}</span><button onclick="deleteTodo(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div>`).join("") || "Görev yok";
         
         // Hedefler
-        document.getElementById("goalsList").innerHTML = userData.goals.map((x,i)=>`<div class="list-item"><span>🎯 ${x.name}</span><span>${x.completed?"✅ Tamamlandı":"⏳ Devam"}</span><div><button class="btn-secondary" style="padding:4px 8px; margin-right:4px;" onclick="toggleGoal(${i})">${x.completed?"Geri Al":"Tamamla"}</button><button onclick="deleteGoal(${i})">❌</button></div></div>`).join("") || "Hedef yok";
+        document.getElementById("goalsList").innerHTML = userData.goals.map((x,i)=>`<div class="list-item"><span>🎯 ${x.name}</span><span>${x.completed?"✅ Tamamlandı":"⏳ Devam"}</span><div><button class="btn-secondary" style="padding:4px 8px; margin-right:4px; font-size:0.7rem;" onclick="toggleGoal(${i})">${x.completed?"Geri Al":"Tamamla"}</button><button onclick="deleteGoal(${i})" style="background:none; border:none; font-size:1.2rem; cursor:pointer;">❌</button></div></div>`).join("") || "Hedef yok";
         
         // Portföy
         let portHtml = "";
         for(let [k,v] of Object.entries(userData.portfolio)) {
-            portHtml += `<div class="input-group"><label>${k} (₺)</label><input type="number" id="port_${k.replace(/\s/g,'')}" value="${v}"></div>`;
+            portHtml += `<div class="input-group"><label>${k} (₺)</label><input type="number" id="port_${k.replace(/\s/g,'')}" value="${v}" style="width:100%; padding:10px; border-radius:28px; border:1px solid #ddd;"></div>`;
         }
         document.getElementById("portfolioInputs").innerHTML = portHtml;
         
@@ -395,7 +409,7 @@
         document.getElementById("currentSavings").value = userData.currentSavings;
         document.getElementById("returnRate").value = userData.returnRate;
         document.getElementById("monthlyExpenseEmergency").value = getTotalExpense();
-        document.getElementById("emergencyCalc").innerHTML = userData.emergencyFund.toLocaleString('tr-TR')+" ₺";
+        document.getElementById("emergencyCalc").innerHTML = userData.emergencyFund.toLocaleString('tr-TR') + " ₺";
         
         // FIRE Ayarları
         document.getElementById("leanExpense").value = userData.fireTargets.lean;
@@ -408,42 +422,51 @@
     }
     
     // ============ TÜM FONKSİYONLAR ============
-    function addIncome() { let ad=document.getElementById("gelirAd").value; let tutar=parseFloat(document.getElementById("gelirTutar").value); if(ad && tutar) { userData.incomes.push({desc:ad, amount:tutar}); updateUI(); document.getElementById("gelirAd").value=""; document.getElementById("gelirTutar").value=""; } }
-    function addExpense() { let ad=document.getElementById("giderAd").value; let tutar=parseFloat(document.getElementById("giderTutar").value); if(ad && tutar) { userData.expenses.push({desc:ad, amount:tutar}); updateUI(); document.getElementById("giderAd").value=""; document.getElementById("giderTutar").value=""; } }
+    function addIncome() { let ad=document.getElementById("gelirAd").value.trim(); let tutar=parseFloat(document.getElementById("gelirTutar").value); if(ad && tutar>0) { userData.incomes.push({desc:ad, amount:tutar, date:new Date().toISOString()}); updateUI(); document.getElementById("gelirAd").value=""; document.getElementById("gelirTutar").value=""; } else { alert("Lütfen geçerli bir gelir girin!"); } }
+    function addExpense() { let ad=document.getElementById("giderAd").value.trim(); let tutar=parseFloat(document.getElementById("giderTutar").value); if(ad && tutar>0) { userData.expenses.push({desc:ad, amount:tutar, date:new Date().toISOString()}); updateUI(); document.getElementById("giderAd").value=""; document.getElementById("giderTutar").value=""; } else { alert("Lütfen geçerli bir gider girin!"); } }
     function deleteIncome(i) { userData.incomes.splice(i,1); updateUI(); }
     function deleteExpense(i) { userData.expenses.splice(i,1); updateUI(); }
-    function updatePassive() { userData.passive={ rental:parseFloat(document.getElementById("rentalIncome").value)||0, dividend:parseFloat(document.getElementById("dividendIncome").value)||0, interest:parseFloat(document.getElementById("interestIncome").value)||0, digital:parseFloat(document.getElementById("digitalIncome").value)||0, other:parseFloat(document.getElementById("otherPassive").value)||0 }; updateUI(); }
-    function addDebt() { let name=document.getElementById("borcKisi").value; let amt=parseFloat(document.getElementById("borcMiktar").value); if(name && amt) { userData.debts.push({name, amount:amt}); updateUI(); document.getElementById("borcKisi").value=""; document.getElementById("borcMiktar").value=""; } }
-    function addReceivable() { let name=document.getElementById("alacakKisi").value; let amt=parseFloat(document.getElementById("alacakMiktar").value); if(name && amt) { userData.receivables.push({name, amount:amt}); updateUI(); document.getElementById("alacakKisi").value=""; document.getElementById("alacakMiktar").value=""; } }
+    function updatePassive() { userData.passive={ rental:parseFloat(document.getElementById("rentalIncome").value)||0, dividend:parseFloat(document.getElementById("dividendIncome").value)||0, interest:parseFloat(document.getElementById("interestIncome").value)||0, digital:parseFloat(document.getElementById("digitalIncome").value)||0, other:parseFloat(document.getElementById("otherPassive").value)||0 }; updateUI(); alert("Pasif gelir kaydedildi!"); }
+    function addDebt() { let name=document.getElementById("borcKisi").value.trim(); let amt=parseFloat(document.getElementById("borcMiktar").value); if(name && amt>0) { userData.debts.push({name, amount:amt}); updateUI(); document.getElementById("borcKisi").value=""; document.getElementById("borcMiktar").value=""; } else { alert("Lütfen geçerli bir borç girin!"); } }
+    function addReceivable() { let name=document.getElementById("alacakKisi").value.trim(); let amt=parseFloat(document.getElementById("alacakMiktar").value); if(name && amt>0) { userData.receivables.push({name, amount:amt}); updateUI(); document.getElementById("alacakKisi").value=""; document.getElementById("alacakMiktar").value=""; } else { alert("Lütfen geçerli bir alacak girin!"); } }
     function deleteDebt(i) { userData.debts.splice(i,1); updateUI(); }
     function deleteReceivable(i) { userData.receivables.splice(i,1); updateUI(); }
-    function addRoutine() { let val=document.getElementById("yeniRutin").value.trim(); if(val) { userData.routines.push(val); updateUI(); document.getElementById("yeniRutin").value=""; } }
+    function addRoutine() { let val=document.getElementById("yeniRutin").value.trim(); if(val) { userData.routines.push(val); updateUI(); document.getElementById("yeniRutin").value=""; } else { alert("Lütfen bir rutin girin!"); } }
     function deleteRoutine(i) { userData.routines.splice(i,1); updateUI(); }
-    function addTodo() { let val=document.getElementById("yeniTodo").value.trim(); if(val) { userData.todos.push({text:val, completed:false}); updateUI(); document.getElementById("yeniTodo").value=""; } }
+    function addTodo() { let val=document.getElementById("yeniTodo").value.trim(); if(val) { userData.todos.push({text:val, completed:false}); updateUI(); document.getElementById("yeniTodo").value=""; } else { alert("Lütfen bir görev girin!"); } }
     function toggleTodo(i) { userData.todos[i].completed = !userData.todos[i].completed; updateUI(); }
     function deleteTodo(i) { userData.todos.splice(i,1); updateUI(); }
-    function addGoal() { let name=document.getElementById("hedefAd").value.trim(); let type=document.getElementById("hedefTur").value; if(name) { userData.goals.push({name, type, completed:false}); updateUI(); document.getElementById("hedefAd").value=""; } }
+    function addGoal() { let name=document.getElementById("hedefAd").value.trim(); let type=document.getElementById("hedefTur").value; if(name) { userData.goals.push({name, type, completed:false}); updateUI(); document.getElementById("hedefAd").value=""; } else { alert("Lütfen bir hedef girin!"); } }
     function toggleGoal(i) { userData.goals[i].completed = !userData.goals[i].completed; updateUI(); }
     function deleteGoal(i) { userData.goals.splice(i,1); updateUI(); }
-    function savePortfolio() { for(let k of Object.keys(userData.portfolio)) { let val=parseFloat(document.getElementById(`port_${k.replace(/\s/g,'')}`).value)||0; userData.portfolio[k]=val; } updateUI(); }
-    function updateSavings() { userData.currentSavings=parseFloat(document.getElementById("currentSavings").value)||0; userData.returnRate=parseFloat(document.getElementById("returnRate").value)||8; updateUI(); }
-    function updateEmergency() { let exp=parseFloat(document.getElementById("monthlyExpenseEmergency").value)||0; userData.emergencyFund=exp*6; updateUI(); }
-    function updateFireTargets() { userData.fireTargets.lean=parseFloat(document.getElementById("leanExpense").value)||15000; userData.fireTargets.regular=parseFloat(document.getElementById("regularExpense").value)||30000; userData.fireTargets.fat=parseFloat(document.getElementById("fatExpense").value)||60000; userData.fireTargets.barista=parseFloat(document.getElementById("baristaExpense").value)||20000; userData.withdrawalRate=parseFloat(document.getElementById("withdrawalRate").value)||4; updateUI(); }
+    function savePortfolio() { for(let k of Object.keys(userData.portfolio)) { let val=parseFloat(document.getElementById(`port_${k.replace(/\s/g,'')}`).value)||0; userData.portfolio[k]=val; } updateUI(); alert("Portföy kaydedildi!"); }
+    function updateSavings() { userData.currentSavings=parseFloat(document.getElementById("currentSavings").value)||0; userData.returnRate=parseFloat(document.getElementById("returnRate").value)||8; updateUI(); alert("Birikim bilgileri güncellendi!"); }
+    function updateEmergency() { let exp=parseFloat(document.getElementById("monthlyExpenseEmergency").value)||0; userData.emergencyFund=exp*6; updateUI(); alert(`Acil durum fonu: ${userData.emergencyFund.toLocaleString('tr-TR')} ₺`); }
+    function updateFireTargets() { userData.fireTargets.lean=parseFloat(document.getElementById("leanExpense").value)||15000; userData.fireTargets.regular=parseFloat(document.getElementById("regularExpense").value)||30000; userData.fireTargets.fat=parseFloat(document.getElementById("fatExpense").value)||60000; userData.fireTargets.barista=parseFloat(document.getElementById("baristaExpense").value)||20000; userData.withdrawalRate=parseFloat(document.getElementById("withdrawalRate").value)||4; updateUI(); alert("FIRE hedefleri güncellendi!"); }
     function exportData() { let dataStr=JSON.stringify(userData); let blob=new Blob([dataStr],{type:"application/json"}); let url=URL.createObjectURL(blob); let a=document.createElement('a'); a.href=url; a.download="fire_asistan_data.json"; a.click(); URL.revokeObjectURL(url); }
-    function importData() { let file=document.getElementById('importFile').files[0]; if(!file) return; let reader=new FileReader(); reader.onload=function(e) { userData=JSON.parse(e.target.result); updateUI(); alert("Veriler içe aktarıldı!"); }; reader.readAsText(file); }
-    function resetAllData() { if(confirm("Tüm verileriniz silinecek! Bu işlem geri alınamaz.")) { userData={ incomes:[{desc:"Maaş",amount:25000}], expenses:[{desc:"Kira",amount:8000},{desc:"Fatura",amount:2000}], passive:{rental:0,dividend:0,interest:0,digital:0,other:0}, debts:[], receivables:[], routines:[], todos:[], goals:[], portfolio:{"Hisse Senedi":0,"Tahvil/Bono":0,"Altın":0,"Döviz":0,"Kripto":0,"Gayrimenkul":0,"Nakit":0,"Emtia":0}, currentSavings:0, returnRate:8, emergencyFund:0, fireTargets:{lean:15000,regular:30000,fat:60000,barista:20000}, withdrawalRate:4 }; updateUI(); } }
+    function importData() { let file=document.getElementById('importFile').files[0]; if(!file) { alert("Lütfen bir dosya seçin!"); return; } let reader=new FileReader(); reader.onload=function(e) { try { userData=JSON.parse(e.target.result); updateUI(); alert("Veriler içe aktarıldı!"); } catch(err) { alert("Geçersiz dosya!"); } }; reader.readAsText(file); }
+    function resetAllData() { if(confirm("Tüm verileriniz silinecek! Bu işlem geri alınamaz.")) { userData={ incomes:[{desc:"Maaş",amount:25000}], expenses:[{desc:"Kira",amount:8000},{desc:"Fatura",amount:2000},{desc:"Market",amount:4000}], passive:{rental:3000,dividend:1000,interest:500,digital:0,other:0}, debts:[], receivables:[], routines:["Sabah sporu","Kitap okuma"], todos:[{text:"Fatura öde",completed:false},{text:"Alışveriş yap",completed:false}], goals:[{name:"10.000₺ birikim",type:"short",completed:false}], portfolio:{"Hisse Senedi":100000,"Tahvil/Bono":50000,"Altın":30000,"Döviz":20000,"Kripto":10000,"Gayrimenkul":0,"Nakit":40000,"Emtia":0}, currentSavings:250000, returnRate:8, emergencyFund:60000, fireTargets:{lean:15000,regular:30000,fat:60000,barista:20000}, withdrawalRate:4 }; updateUI(); alert("Tüm veriler sıfırlandı!"); } }
     
     // FIRE Tipi Seçimi
     document.querySelectorAll(".fire-type-btn").forEach(btn => {
-        btn.onclick = () => { selectedFireType = btn.getAttribute("data-fire"); updateUI(); };
+        btn.onclick = function() { 
+            selectedFireType = this.getAttribute("data-fire"); 
+            updateUI(); 
+        };
     });
     
     // Sekme Geçişleri
-    function switchPanel(id) { document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active-panel')); document.getElementById(id+"Panel").classList.add('active-panel'); document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.querySelector(`.tab-btn[data-panel="${id}"]`).classList.add('active'); }
+    function switchPanel(id) { 
+        document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active-panel')); 
+        document.getElementById(id+"Panel").classList.add('active-panel'); 
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); 
+        document.querySelector(`.tab-btn[data-panel="${id}"]`).classList.add('active'); 
+    }
     document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>switchPanel(b.getAttribute('data-panel'))));
     
     // Başlangıç
     loadData();
+    console.log("Uygulama başlatıldı!");
 </script>
 </body>
 </html>
