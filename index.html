@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FIRE: Kişisel Finans Asistanı | AI Destekli | Finansal Özgürlük</title>
+    <title>FIRE: Kişisel Finans Asistanı | Finansal Özgürlük Yolu</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,6 @@
             font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
         
-        /* Tema Değişkenleri */
         :root {
             --bg-color: #e3f2fd;
             --card-bg: white;
@@ -20,7 +19,6 @@
             --header-bg: linear-gradient(135deg, #1a5c2e, #2d8c4a);
             --border-color: #c8e6c9;
             --btn-primary: #1a5c2e;
-            --btn-primary-hover: #2d8c4a;
             --fire-card: linear-gradient(135deg, #ff6b35, #f7931e);
         }
         
@@ -40,12 +38,8 @@
             transition: all 0.3s;
             color: var(--text-color);
         }
-        .container {
-            max-width: 550px;
-            margin: 0 auto;
-        }
+        .container { max-width: 550px; margin: 0 auto; }
         
-        /* HEADER */
         .header {
             text-align: center;
             margin-bottom: 20px;
@@ -55,9 +49,8 @@
             color: white;
         }
         .header h1 { font-size: 1.6rem; }
-        .header p { font-size: 0.7rem; opacity: 0.9; margin-top: 4px; }
+        .header p { font-size: 0.7rem; opacity: 0.9; }
         
-        /* KARTLAR */
         .card {
             background: var(--card-bg);
             border-radius: 24px;
@@ -187,10 +180,7 @@
         
         .panel { display: none; animation: fadeIn 0.2s; }
         .panel.active-panel { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         
         .todo-checkbox { width: 20px; height: 20px; margin-right: 10px; cursor: pointer; }
         .completed { text-decoration: line-through; opacity: 0.6; }
@@ -272,16 +262,12 @@
 <body>
 <div class="container">
     <div class="header">
-        <h1>🔥 FIRE; Kişisel Finans Asistanı</h1>
-        <p id="headerSubtitle">AI Destekli | Finansal Özgürlük</p>
+        <h1>🔥 FIRE: Kişisel Finans Asistanı</h1>
+        <p>Finansal Özgürlük Hesabı | Enflasyon Dahil | AI Destekli</p>
     </div>
 
     <!-- Ayarlar Çubuğu -->
     <div class="settings-bar">
-        <select id="languageSelect" onchange="changeLanguage()">
-            <option value="tr">🇹🇷 Türkçe</option>
-            <option value="en">🇬🇧 English</option>
-        </select>
         <select id="currencySelect" onchange="changeCurrency()">
             <option value="TRY">₺ TL</option>
             <option value="USD">$ Dolar</option>
@@ -293,12 +279,12 @@
     <!-- GİRİŞ EKRANI -->
     <div id="loginScreen">
         <div class="card" style="text-align:center;">
-            <div class="card-title" id="loginTitle">🔐 Giriş Yap veya Kayıt Ol</div>
-            <div class="input-group"><label id="emailLabel">E-posta</label><input type="email" id="loginEmail" placeholder="ornek@email.com"></div>
-            <div class="input-group"><label id="passwordLabel">Şifre</label><input type="password" id="loginPassword" placeholder="******"></div>
-            <button class="btn-primary" onclick="login()" id="loginBtn">Giriş Yap</button>
-            <button class="btn-secondary" onclick="register()" id="registerBtn" style="margin-top:8px;">Hesap Oluştur</button>
-            <p style="font-size:0.7rem; margin-top:12px;" id="demoInfo">Admin: admin@fire.com / admin123 | Demo: demo@fire.com / 123456</p>
+            <div class="card-title">🔐 Giriş Yap veya Kayıt Ol</div>
+            <div class="input-group"><label>E-posta</label><input type="email" id="loginEmail" placeholder="ornek@email.com"></div>
+            <div class="input-group"><label>Şifre</label><input type="password" id="loginPassword" placeholder="******"></div>
+            <button class="btn-primary" onclick="login()">Giriş Yap</button>
+            <button class="btn-secondary" onclick="register()" style="margin-top:8px;">Hesap Oluştur</button>
+            <p style="font-size:0.7rem; margin-top:12px;">Admin: admin@fire.com / admin123 | Demo: demo@fire.com / 123456</p>
         </div>
     </div>
 
@@ -322,7 +308,7 @@
                 <button class="fire-type-btn" data-fire="barista">💎 Barista</button>
             </div>
             <div class="fire-years" id="fireYearsLeft">--</div>
-            <div id="fireYearsText">yıl sonra FIRE olacaksın</div>
+            <div>yıl sonra FIRE olacaksın</div>
             <div class="fire-percent" id="firePercent">0%</div>
             <div class="progress-bar"><div class="progress-fill" id="fireProgressBar"></div></div>
             <div id="fireLevelBadge" class="fire-level-badge level-below">⚠️ Hedef Altında</div>
@@ -335,13 +321,27 @@
 
         <!-- ÖZET KARTLARI -->
         <div class="grid-3">
-            <div class="card"><div class="card-title" id="totalAssetTitle">🏦 Toplam Varlık</div><div class="card-value" id="totalAsset">0 ₺</div></div>
-            <div class="card"><div class="card-title" id="totalDebtTitle">💸 Toplam Borç</div><div class="card-value" id="totalDebt">0 ₺</div></div>
-            <div class="card"><div class="card-title" id="totalReceivableTitle">💰 Toplam Alacak</div><div class="card-value" id="totalReceivable">0 ₺</div></div>
+            <div class="card"><div class="card-title">🏦 Toplam Varlık</div><div class="card-value" id="totalAsset">0 ₺</div></div>
+            <div class="card"><div class="card-title">💸 Toplam Borç</div><div class="card-value" id="totalDebt">0 ₺</div></div>
+            <div class="card"><div class="card-title">💰 Toplam Alacak</div><div class="card-value" id="totalReceivable">0 ₺</div></div>
         </div>
         <div class="grid-2">
-            <div class="card"><div class="card-title" id="passiveTitle">🔄 Pasif Gelir</div><div class="card-value" id="passiveTotal">0 ₺</div></div>
-            <div class="card"><div class="card-title" id="fireTargetTitle">🎯 FIRE Hedefi</div><div class="card-value" id="fireTarget">0 ₺</div></div>
+            <div class="card"><div class="card-title">🔄 Pasif Gelir (Aylık)</div><div class="card-value" id="passiveTotal">0 ₺</div></div>
+            <div class="card"><div class="card-title">🎯 FIRE Hedefi</div><div class="card-value" id="fireTarget">0 ₺</div></div>
+        </div>
+
+        <!-- NET DEĞER KARTI (DOĞRU HESAP) -->
+        <div class="card" style="background:linear-gradient(135deg,#1a5c2e,#2d8c4a); color:white;">
+            <div class="card-title" style="color:rgba(255,255,255,0.7);">💰 NET DEĞER (GERÇEK SERVET)</div>
+            <div class="card-value" id="netWorth">0 ₺</div>
+            <div style="font-size:0.7rem; margin-top:8px;">(Varlık + Alacak) - Borç</div>
+        </div>
+
+        <!-- AYLIK NET GELİR KARTI -->
+        <div class="card">
+            <div class="card-title">📊 AYLIK NET GELİR</div>
+            <div class="card-value" id="monthlyNet">0 ₺</div>
+            <div style="font-size:0.7rem;">(Gelir + Pasif Gelir) - Gider</div>
         </div>
 
         <!-- MENÜ -->
@@ -351,54 +351,39 @@
             <button class="tab-btn" data-panel="gider">💸 Gider</button>
             <button class="tab-btn" data-panel="pasif">🔄 Pasif</button>
             <button class="tab-btn" data-panel="borc">💳 Borç/Alacak</button>
-            <button class="tab-btn" data-panel="rutin">✅ Günlük Rutin</button>
-            <button class="tab-btn" data-panel="todo">📝 Yapılacaklar</button>
-            <button class="tab-btn" data-panel="hedef">🎯 Hedefler</button>
+            <button class="tab-btn" data-panel="rutin">✅ Rutin</button>
+            <button class="tab-btn" data-panel="todo">📝 Yapılacak</button>
+            <button class="tab-btn" data-panel="hedef">🎯 Hedef</button>
             <button class="tab-btn" data-panel="portfoy">📈 Portföy</button>
-            <button class="tab-btn" data-panel="acil">🚨 Acil Fon</button>
+            <button class="tab-btn" data-panel="acil">🚨 Acil</button>
             <button class="tab-btn" data-panel="birikim">🏦 Birikim</button>
             <button class="tab-btn" data-panel="ayar">⚙️ Ayar</button>
-            <button class="tab-btn" data-panel="veri">📤 Veriler</button>
-        </div>
-        
-        <!-- NET DEĞER KARTI -->
-        <div class="card" style="background:linear-gradient(135deg,#1a5c2e,#2d8c4a); color:white;">
-            <div class="card-title" style="color:rgba(255,255,255,0.7);" id="netWorthTitle">💰 NET DEĞER (TOPLAM SERVET)</div>
-            <div class="card-value" id="netWorth">0 ₺</div>
-            <div style="font-size:0.7rem; margin-top:8px;" id="netWorthDesc">Toplam Varlık - Toplam Borç</div>
+            <button class="tab-btn" data-panel="veri">📤 Veri</button>
         </div>
 
-        <!-- AYLIK NET GELİR KARTI -->
-        <div class="card">
-            <div class="card-title" id="monthlyNetTitle">📊 AYLIK NET GELİR</div>
-            <div class="card-value" id="monthlyNet">0 ₺</div>
-            <div style="font-size:0.7rem;" id="monthlyNetDesc">(Gelir + Pasif Gelir) - Gider</div>
-        </div>
-
-        <!-- PANEL İÇERİKLERİ (Kısa tutmak için özet) -->
+        <!-- PANEL İÇERİKLERİ -->
         <div id="dashboardPanel" class="panel active-panel">
-            <div class="card"><div class="card-title" id="recentTitle">📊 Son İşlemler</div><div id="recentTransactions">-</div></div>
-            <div class="card"><div class="card-title" id="tipTitle">💡 FIRE İpucu</div><div id="fireTip">Aylık yatırımını artırarak FIRE'a daha hızlı ulaşabilirsin!</div></div>
-            <div class="card"><div class="card-title" id="taskTitle">✅ Bugünkü Görevler</div><div id="todayTasksCount">0 görev</div></div>
+            <div class="card"><div class="card-title">📊 Son İşlemler</div><div id="recentTransactions">-</div></div>
+            <div class="card"><div class="card-title">💡 FIRE İpucu</div><div id="fireTip">Aylık yatırımını artırarak FIRE'a daha hızlı ulaşabilirsin!</div></div>
+            <div class="card"><div class="card-title">✅ Bugünkü Görevler</div><div id="todayTasksCount">0 görev</div></div>
         </div>
 
-        <!-- Diğer paneller (kısa tutuldu) -->
         <div id="gelirPanel" class="panel"><div class="card"><div class="card-title">➕ Yeni Gelir</div><div class="input-group"><input type="text" id="gelirAd" placeholder="Kaynak"></div><div class="input-group"><input type="number" id="gelirTutar" placeholder="Tutar"></div><button class="btn-primary" onclick="addIncome()">Ekle</button></div><div class="card"><div id="gelirListesi"></div></div></div>
         <div id="giderPanel" class="panel"><div class="card"><div class="card-title">➕ Yeni Gider</div><div class="input-group"><input type="text" id="giderAd" placeholder="Kategori"></div><div class="input-group"><input type="number" id="giderTutar" placeholder="Tutar"></div><button class="btn-primary" onclick="addExpense()">Ekle</button></div><div class="card"><div id="giderListesi"></div></div></div>
-        <div id="pasifPanel" class="panel"><div class="card"><div class="card-title">🔄 Pasif Gelir</div><div class="input-group"><label>🏠 Kira</label><input type="number" id="rentalIncome"></div><div class="input-group"><label>📈 Temettü</label><input type="number" id="dividendIncome"></div><div class="input-group"><label>🏦 Faiz</label><input type="number" id="interestIncome"></div><button class="btn-primary" onclick="updatePassive()">Kaydet</button></div></div>
+        <div id="pasifPanel" class="panel"><div class="card"><div class="card-title">🔄 Pasif Gelir (Aylık)</div><div class="input-group"><label>🏠 Kira</label><input type="number" id="rentalIncome"></div><div class="input-group"><label>📈 Temettü</label><input type="number" id="dividendIncome"></div><div class="input-group"><label>🏦 Faiz</label><input type="number" id="interestIncome"></div><div class="input-group"><label>💻 Dijital</label><input type="number" id="digitalIncome"></div><button class="btn-primary" onclick="updatePassive()">Kaydet</button></div></div>
         <div id="borcPanel" class="panel"><div class="card"><div class="card-title">➕ Borç</div><input type="text" id="borcKisi" placeholder="Kişi"><input type="number" id="borcMiktar" placeholder="Tutar"><button class="btn-primary" onclick="addDebt()">Ekle</button></div><div class="card"><div class="card-title">➕ Alacak</div><input type="text" id="alacakKisi" placeholder="Kişi"><input type="number" id="alacakMiktar" placeholder="Tutar"><button class="btn-primary" onclick="addReceivable()">Ekle</button></div><div class="card"><div id="debtList"></div></div><div class="card"><div id="receivableList"></div></div></div>
         <div id="rutinPanel" class="panel"><div class="card"><div class="card-title">✅ Rutinler</div><input type="text" id="yeniRutin"><button class="btn-primary" onclick="addRoutine()">Ekle</button><div id="routineList"></div></div></div>
         <div id="todoPanel" class="panel"><div class="card"><div class="card-title">📝 Yapılacaklar</div><input type="text" id="yeniTodo"><button class="btn-primary" onclick="addTodo()">Ekle</button><div id="todoList"></div></div></div>
         <div id="hedefPanel" class="panel"><div class="card"><div class="card-title">🎯 Hedefler</div><input type="text" id="hedefAd"><button class="btn-primary" onclick="addGoal()">Ekle</button><div id="goalsList"></div></div></div>
-        <div id="portfoyPanel" class="panel"><div class="card"><div class="card-title">📊 Portföy</div><div id="portfolioInputs"></div><button class="btn-primary" onclick="savePortfolio()">Kaydet</button></div></div>
-        <div id="acilPanel" class="panel"><div class="card"><div class="card-title">🚨 Acil Durum</div><input type="number" id="monthlyExpenseEmergency"><button class="btn-primary" onclick="updateEmergency()">Hesapla (6 ay)</button><div id="emergencyCalc"></div></div></div>
-        <div id="birikimPanel" class="panel"><div class="card"><div class="card-title">🏦 Birikim</div><input type="number" id="currentSavings"><input type="number" id="returnRate" value="8"><button class="btn-primary" onclick="updateSavings()">Güncelle</button></div></div>
-        <div id="ayarPanel" class="panel"><div class="card"><div class="card-title">⚙️ FIRE Hedefleri</div><input type="number" id="leanExpense" value="15000"><input type="number" id="regularExpense" value="30000"><input type="number" id="fatExpense" value="60000"><input type="number" id="baristaExpense" value="20000"><input type="number" id="withdrawalRate" value="4"><input type="number" id="inflationRate" value="8" placeholder="Enflasyon %"><button class="btn-primary" onclick="updateFireTargets()">Kaydet</button></div></div>
-        <div id="veriPanel" class="panel"><div class="card"><div class="card-title">📤 Veri</div><button class="btn-secondary" onclick="exportData()">Dışa Aktar</button><input type="file" id="importFile"><button class="btn-secondary" onclick="importData()">İçe Aktar</button><button class="btn-danger" onclick="resetAllData()">Sıfırla</button></div></div>
+        <div id="portfoyPanel" class="panel"><div class="card"><div class="card-title">📊 Portföy (8 Varlık)</div><div id="portfolioInputs"></div><button class="btn-primary" onclick="savePortfolio()">Kaydet</button></div></div>
+        <div id="acilPanel" class="panel"><div class="card"><div class="card-title">🚨 Acil Durum Fonu</div><input type="number" id="monthlyExpenseEmergency" placeholder="Aylık Gider"><button class="btn-primary" onclick="updateEmergency()">Hesapla (6 ay)</button><div id="emergencyCalc"></div></div></div>
+        <div id="birikimPanel" class="panel"><div class="card"><div class="card-title">🏦 Birikim ve Getiri</div><div class="input-group"><label>Toplam Birikim (₺)</label><input type="number" id="currentSavings"></div><div class="input-group"><label>Yıllık Getiri Oranı (%)</label><input type="number" id="returnRate" value="8"></div><button class="btn-primary" onclick="updateSavings()">Güncelle</button></div></div>
+        <div id="ayarPanel" class="panel"><div class="card"><div class="card-title">⚙️ FIRE Hedef Ayarları</div><div class="input-group"><label>Lean FIRE Aylık Gider (₺)</label><input type="number" id="leanExpense" value="15000"></div><div class="input-group"><label>Regular FIRE Aylık Gider (₺)</label><input type="number" id="regularExpense" value="30000"></div><div class="input-group"><label>Fat FIRE Aylık Gider (₺)</label><input type="number" id="fatExpense" value="60000"></div><div class="input-group"><label>Barista FIRE Aylık Gider (₺)</label><input type="number" id="baristaExpense" value="20000"></div><div class="input-group"><label>Güvenli Çekilme Oranı (%)</label><input type="number" id="withdrawalRate" value="4" step="0.5"></div><div class="input-group"><label>Beklenen Enflasyon Oranı (%)</label><input type="number" id="inflationRate" value="8" step="0.5"></div><button class="btn-primary" onclick="updateFireTargets()">Kaydet</button></div></div>
+        <div id="veriPanel" class="panel"><div class="card"><div class="card-title">📤 Veri Yönetimi</div><button class="btn-secondary" onclick="exportData()">Dışa Aktar</button><input type="file" id="importFile"><button class="btn-secondary" onclick="importData()">İçe Aktar</button><button class="btn-danger" onclick="resetAllData()">Sıfırla</button></div></div>
     </div>
 
     <div class="footer">
-        © 2025 FIRE Asistanı | Geliştirici: CFO. Orhan Boyraz | orhanboyraz0216@gmail.com<br>
+        © 2025 FIRE: Kişisel Finans Asistanı | Geliştirici: CFO.Orhan Boyraz | orhanboyraz0216@gmail.com<br>
         🌐 <a href="https://anadolunetwork.tr" target="_blank">Web Sitemizi Ziyaret Edin</a>
     </div>
 </div>
@@ -406,61 +391,9 @@
 <button class="whatsapp-float" id="whatsappFloatBtn">📲</button>
 
 <script>
-    // ============ ÇEVİRİLER ============
-    const translations = {
-        tr: {
-            netWorthTitle: "💰 NET DEĞER (TOPLAM SERVET)",
-            monthlyNetTitle: "📊 AYLIK NET GELİR",
-            totalAssetTitle: "🏦 Toplam Varlık",
-            totalDebtTitle: "💸 Toplam Borç",
-            totalReceivableTitle: "💰 Toplam Alacak",
-            passiveTitle: "🔄 Pasif Gelir",
-            fireTargetTitle: "🎯 FIRE Hedefi",
-            fireYearsText: "yıl sonra FIRE olacaksın",
-            loginTitle: "🔐 Giriş Yap veya Kayıt Ol",
-            emailLabel: "E-posta",
-            passwordLabel: "Şifre",
-            loginBtn: "Giriş Yap",
-            registerBtn: "Hesap Oluştur"
-        },
-        en: {
-            netWorthTitle: "💰 NET WORTH (TOTAL WEALTH)",
-            monthlyNetTitle: "📊 MONTHLY NET INCOME",
-            totalAssetTitle: "🏦 Total Assets",
-            totalDebtTitle: "💸 Total Debt",
-            totalReceivableTitle: "💰 Total Receivables",
-            passiveTitle: "🔄 Passive Income",
-            fireTargetTitle: "🎯 FIRE Target",
-            fireYearsText: "years until FIRE",
-            loginTitle: "🔐 Login or Sign Up",
-            emailLabel: "Email",
-            passwordLabel: "Password",
-            loginBtn: "Login",
-            registerBtn: "Sign Up"
-        }
-    };
-    
-    let currentLang = "tr";
+    // ============ PARA BİRİMİ ============
     let currentCurrency = "TRY";
     let exchangeRates = { TRY: 1, USD: 0.028, EUR: 0.026 };
-    
-    function changeLanguage() {
-        currentLang = document.getElementById("languageSelect").value;
-        document.getElementById("netWorthTitle").innerText = translations[currentLang].netWorthTitle;
-        document.getElementById("monthlyNetTitle").innerText = translations[currentLang].monthlyNetTitle;
-        document.getElementById("totalAssetTitle").innerText = translations[currentLang].totalAssetTitle;
-        document.getElementById("totalDebtTitle").innerText = translations[currentLang].totalDebtTitle;
-        document.getElementById("totalReceivableTitle").innerText = translations[currentLang].totalReceivableTitle;
-        document.getElementById("passiveTitle").innerText = translations[currentLang].passiveTitle;
-        document.getElementById("fireTargetTitle").innerText = translations[currentLang].fireTargetTitle;
-        document.getElementById("fireYearsText").innerText = translations[currentLang].fireYearsText;
-        document.getElementById("loginTitle").innerText = translations[currentLang].loginTitle;
-        document.getElementById("emailLabel").innerText = translations[currentLang].emailLabel;
-        document.getElementById("passwordLabel").innerText = translations[currentLang].passwordLabel;
-        document.getElementById("loginBtn").innerText = translations[currentLang].loginBtn;
-        document.getElementById("registerBtn").innerText = translations[currentLang].registerBtn;
-        updateUI();
-    }
     
     function changeCurrency() {
         currentCurrency = document.getElementById("currencySelect").value;
@@ -477,17 +410,13 @@
     function toggleTheme() {
         document.body.classList.toggle("dark");
         let btn = document.getElementById("themeToggleBtn");
-        if(document.body.classList.contains("dark")) {
-            btn.innerHTML = "☀️ Açık Tema";
-        } else {
-            btn.innerHTML = "🌙 Koyu Tema";
-        }
+        btn.innerHTML = document.body.classList.contains("dark") ? "☀️ Açık Tema" : "🌙 Koyu Tema";
     }
     
     // ============ WHATSAPP ============
     const WHATSAPP_NUMBER = "905418660202";
     function goToWhatsApp() {
-        let msg = encodeURIComponent("Merhaba, FIRE Finans Asistanı satın almak istiyorum.");
+        let msg = encodeURIComponent("Merhaba, FIRE Asistanı satın almak istiyorum.");
         window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
     }
     document.getElementById("whatsappFloatBtn")?.addEventListener("click", goToWhatsApp);
@@ -496,7 +425,7 @@
     let users = {};
     let currentUser = null;
     let currentUserData = null;
-    let selectedFireType = "lean";
+    let selectedFireType = "regular";
     
     function getDefaultUserData() {
         return {
@@ -520,7 +449,7 @@
     }
     
     function loadUsers() {
-        let saved = localStorage.getItem("fire_users_db");
+        let saved = localStorage.getItem("fire_users_db_v2");
         if(saved) {
             users = JSON.parse(saved);
         } else {
@@ -532,10 +461,10 @@
         }
     }
     
-    function saveUsers() { localStorage.setItem("fire_users_db", JSON.stringify(users)); }
+    function saveUsers() { localStorage.setItem("fire_users_db_v2", JSON.stringify(users)); }
     function saveCurrentUserData() { if(currentUser && users[currentUser]) { users[currentUser].data = currentUserData; saveUsers(); } }
     
-    // Hesaplamalar
+    // ============ DOĞRU HESAPLAMALAR ============
     function getTotalIncome() { return currentUserData.incomes.reduce((s,i)=>s+(i.amount||0),0); }
     function getTotalExpense() { return currentUserData.expenses.reduce((s,e)=>s+(e.amount||0),0); }
     function getTotalPassive() { let p=currentUserData.passive; return (p.rental||0)+(p.dividend||0)+(p.interest||0)+(p.digital||0)+(p.other||0); }
@@ -543,44 +472,65 @@
     function getTotalReceivable() { return currentUserData.receivables.reduce((s,r)=>s+(r.amount||0),0); }
     function getTotalPortfolio() { return Object.values(currentUserData.portfolio).reduce((a,b)=>a+b,0); }
     function getTotalAsset() { return currentUserData.currentSavings + getTotalPortfolio(); }
-    function getNetWorth() { return getTotalAsset() - getTotalDebt(); }
+    
+    // DOĞRU NET DEĞER: (Varlık + Alacak) - Borç
+    function getNetWorth() { return getTotalAsset() + getTotalReceivable() - getTotalDebt(); }
+    
     function getMonthlyNet() { return (getTotalIncome() + getTotalPassive()) - getTotalExpense(); }
     
-    // Enflasyonlu FIRE Hesaplama
+    // ENFLASYONLU FIRE HESAPLAMA (Reel Getiri ile)
     function calculateFIRE() {
-        let monthlyInvest = Math.max(0, getMonthlyNet());
+        let monthlyInvest = Math.max(0, getMonthlyNet());  // Aylık yatırım = net gelir
         let targetMonthly = currentUserData.fireTargets[selectedFireType];
         let withdrawalRate = currentUserData.withdrawalRate / 100;
         let inflationRate = (currentUserData.inflationRate || 8) / 100;
-        let targetFire = (targetMonthly * 12) / withdrawalRate;
-        let current = currentUserData.currentSavings + getTotalPortfolio();
-        let realReturnRate = (currentUserData.returnRate / 100) - inflationRate;
-        if(realReturnRate < 0) realReturnRate = 0.01;
+        let nominalReturnRate = currentUserData.returnRate / 100;
         
-        let years = 0, proj = current;
-        let annualInvest = monthlyInvest * 12;
-        if(annualInvest > 0 && targetFire > current) {
-            while(proj < targetFire && years < 50) {
-                proj = proj * (1 + realReturnRate) + annualInvest;
+        // Reel getiri = (1 + nominal) / (1 + enflasyon) - 1
+        let realReturnRate = (1 + nominalReturnRate) / (1 + inflationRate) - 1;
+        if(realReturnRate < 0) realReturnRate = 0.005; // Minimum %0.5 reel getiri
+        
+        // FIRE Hedefi: (Aylık Gider × 12) / Çekilme Oranı
+        let targetFire = (targetMonthly * 12) / withdrawalRate;
+        
+        let currentWealth = getTotalAsset() + getTotalReceivable();  // Varlık + Alacak
+        let years = 0;
+        let projectedWealth = currentWealth;
+        let annualInvestment = monthlyInvest * 12;
+        
+        if(annualInvestment > 0 && targetFire > currentWealth) {
+            while(projectedWealth < targetFire && years < 60) {
+                projectedWealth = projectedWealth * (1 + realReturnRate) + annualInvestment;
                 years++;
             }
-        } else if(current >= targetFire) years = 0;
-        else years = 999;
-        let percent = Math.min(100, (current / targetFire) * 100);
-        return { monthlyInvest, targetFire, years, percent };
+        } else if(currentWealth >= targetFire) {
+            years = 0;
+        } else {
+            years = 999;
+        }
+        
+        let percent = Math.min(100, (currentWealth / targetFire) * 100);
+        return { monthlyInvest, targetFire, years, percent, realReturnRate };
     }
     
-    // Hangi FIRE seviyesi
+    // Hangi FIRE seviyesinde olduğunu bul
     function getFireLevel() {
-        let current = currentUserData.currentSavings + getTotalPortfolio();
-        let targets = currentUserData.fireTargets;
+        let currentWealth = getTotalAsset() + getTotalReceivable();
         let withdrawal = currentUserData.withdrawalRate / 100;
-        let needed = (targets.regular * 12) / withdrawal;
-        if(current >= needed) return { level: "regular", name: "Regular FIRE", class: "level-regular", emoji: "🥈" };
-        needed = (targets.lean * 12) / withdrawal;
-        if(current >= needed) return { level: "lean", name: "Lean FIRE", class: "level-lean", emoji: "🥉" };
-        needed = (targets.barista * 12) / withdrawal;
-        if(current >= needed) return { level: "barista", name: "Barista FIRE", class: "level-barista", emoji: "💎" };
+        let targets = currentUserData.fireTargets;
+        
+        let regularNeeded = (targets.regular * 12) / withdrawal;
+        if(currentWealth >= regularNeeded) return { level: "regular", name: "Regular FIRE", class: "level-regular", emoji: "🥈" };
+        
+        let leanNeeded = (targets.lean * 12) / withdrawal;
+        if(currentWealth >= leanNeeded) return { level: "lean", name: "Lean FIRE", class: "level-lean", emoji: "🥉" };
+        
+        let baristaNeeded = (targets.barista * 12) / withdrawal;
+        if(currentWealth >= baristaNeeded) return { level: "barista", name: "Barista FIRE", class: "level-barista", emoji: "💎" };
+        
+        let fatNeeded = (targets.fat * 12) / withdrawal;
+        if(currentWealth >= fatNeeded) return { level: "fat", name: "Fat FIRE", class: "level-fat", emoji: "🥇" };
+        
         return { level: "below", name: "Hedef Altı", class: "level-below", emoji: "⚠️" };
     }
     
@@ -589,15 +539,20 @@
         let monthlyNet = getMonthlyNet();
         let fire = calculateFIRE();
         let level = getFireLevel();
-        if(monthlyNet < 0) return "💡 Giderleriniz gelirinizden fazla! Acil önlem almalısınız.";
-        if(fire.years > 30) return "📈 Uzun vadeli yatırım yaparak FIRE sürecini hızlandırabilirsiniz.";
-        if(fire.years > 15) return "🚀 Pasif gelir kaynaklarınızı artırarak hedefinize daha hızlı ulaşabilirsiniz.";
-        if(fire.years > 5) return "🎯 Çok iyi gidiyorsunuz! Yatırım stratejinizi koruyun.";
-        return "🏆 Tebrikler! FIRE hedefine çok yakınsınız. Son hamlelerle tamamlayın!";
+        
+        if(monthlyNet < 0) return "⚠️ Giderleriniz gelirinizden fazla! Acilen bütçe yapmalısınız.";
+        if(fire.years > 40) return "📈 Uzun vadeli yatırımlara yönelin ve pasif gelir kaynaklarınızı artırın.";
+        if(fire.years > 20) return "🚀 Aylık yatırım oranınızı artırarak FIRE sürecini hızlandırabilirsiniz.";
+        if(fire.years > 10) return "🎯 İyi gidiyorsunuz! Enflasyona karşı portföyünüzü çeşitlendirin.";
+        if(fire.years > 5) return "💪 Çok yaklaştınız! Yatırım stratejinize sadık kalın.";
+        if(fire.years === 0) return "🏆 TEBRİKLER! Finansal özgürlüğe ulaştınız. Şimdi hayallerinizi yaşayın!";
+        return "🌟 Düzenli yatırım ve pasif gelir ile hedefinize ulaşabilirsiniz.";
     }
     
+    // UI Güncelleme
     function updateUI() {
         if(!currentUserData) return;
+        
         let totalAsset = getTotalAsset();
         let totalDebt = getTotalDebt();
         let totalReceivable = getTotalReceivable();
@@ -614,9 +569,10 @@
         document.getElementById("totalReceivable").innerHTML = convertCurrency(totalReceivable);
         document.getElementById("passiveTotal").innerHTML = convertCurrency(passiveInc);
         document.getElementById("fireTarget").innerHTML = convertCurrency(fire.targetFire);
-        document.getElementById("fireYearsLeft").innerHTML = fire.years===0?"0 (Tebrikler! 🎉)":(fire.years>=50?"50+":fire.years);
-        document.getElementById("firePercent").innerHTML = fire.percent.toFixed(1)+"%";
-        document.getElementById("fireProgressBar").style.width = fire.percent+"%";
+        
+        document.getElementById("fireYearsLeft").innerHTML = fire.years === 0 ? "0 (Tebrikler! 🎉)" : (fire.years >= 60 ? "60+" : fire.years);
+        document.getElementById("firePercent").innerHTML = fire.percent.toFixed(1) + "%";
+        document.getElementById("fireProgressBar").style.width = fire.percent + "%";
         
         let badge = document.getElementById("fireLevelBadge");
         badge.className = "fire-level-badge " + level.class;
@@ -627,51 +583,73 @@
         let incompleteTodos = currentUserData.todos.filter(t=>!t.completed).length;
         document.getElementById("todayTasksCount").innerHTML = incompleteTodos + " görev kaldı";
         
-        let tip = passiveInc > getTotalExpense()*0.7 ? "🎉 Pasif gelirin giderlerinin çoğunu karşılıyor!" : (fire.monthlyInvest<5000?"💡 Aylık yatırımını artır!":"🚀 İyi gidiyorsun!");
+        let tip = "";
+        if(passiveInc > getTotalExpense() * 0.7) tip = "🎉 Pasif geliriniz giderlerinizin %70'inden fazlasını karşılıyor!";
+        else if(monthlyNet < 0) tip = "⚠️ Giderleriniz gelirinizden fazla! Acil önlem alın!";
+        else if(fire.monthlyInvest < 5000) tip = "💡 Aylık yatırımınızı artırarak FIRE sürecini hızlandırabilirsiniz.";
+        else if(fire.percent > 70) tip = "🚀 Harika! FIRE hedefinize çok yaklaştınız!";
+        else tip = "📈 Düzenli yatırım yapmaya devam edin!";
         document.getElementById("fireTip").innerHTML = tip;
         
-        // Gelir/Gider Listeleri
+        // Son işlemler
+        let recent = [...currentUserData.incomes.slice(-2), ...currentUserData.expenses.slice(-2)];
+        document.getElementById("recentTransactions").innerHTML = recent.map(t=>`<div class="list-item">${t.desc}: ${convertCurrency(t.amount)}</div>`).join("") || "İşlem yok";
+        
+        // Gelir Listesi
         document.getElementById("gelirListesi").innerHTML = currentUserData.incomes.map((x,i)=>`<div class="list-item">${x.desc} <span class="income">+${convertCurrency(x.amount)}</span> <button class="delete-btn" onclick="deleteIncome(${i})">❌</button></div>`).join("") || "Gelir yok";
+        
+        // Gider Listesi
         document.getElementById("giderListesi").innerHTML = currentUserData.expenses.map((x,i)=>`<div class="list-item">${x.desc} <span class="expense">-${convertCurrency(x.amount)}</span> <button class="delete-btn" onclick="deleteExpense(${i})">❌</button></div>`).join("") || "Gider yok";
         
+        // Pasif Input
         document.getElementById("rentalIncome").value = currentUserData.passive.rental;
         document.getElementById("dividendIncome").value = currentUserData.passive.dividend;
         document.getElementById("interestIncome").value = currentUserData.passive.interest;
+        document.getElementById("digitalIncome").value = currentUserData.passive.digital;
         
+        // Borç/Alacak
         document.getElementById("debtList").innerHTML = currentUserData.debts.map((x,i)=>`<div class="list-item">${x.name} <span>${convertCurrency(x.amount)}</span> <button class="delete-btn" onclick="deleteDebt(${i})">❌</button></div>`).join("") || "Borç yok";
         document.getElementById("receivableList").innerHTML = currentUserData.receivables.map((x,i)=>`<div class="list-item">${x.name} <span>${convertCurrency(x.amount)}</span> <button class="delete-btn" onclick="deleteReceivable(${i})">❌</button></div>`).join("") || "Alacak yok";
         
+        // Rutin
         document.getElementById("routineList").innerHTML = currentUserData.routines.map((x,i)=>`<div class="list-item">✅ ${x} <button class="delete-btn" onclick="deleteRoutine(${i})">❌</button></div>`).join("") || "Rutin yok";
+        
+        // Todo
         document.getElementById("todoList").innerHTML = currentUserData.todos.map((x,i)=>`<div class="todo-item"><input type="checkbox" class="todo-checkbox" ${x.completed?"checked":""} onchange="toggleTodo(${i})"><span class="${x.completed?'completed':''}">${x.text}</span><button class="delete-btn" onclick="deleteTodo(${i})">❌</button></div>`).join("") || "Görev yok";
+        
+        // Hedef
         document.getElementById("goalsList").innerHTML = currentUserData.goals.map((x,i)=>`<div class="list-item"><span>🎯 ${x.name}</span><span>${x.completed?"✅ Tamamlandı":"⏳ Devam"}</span><div><button class="btn-secondary" style="padding:4px 8px; margin-right:4px; font-size:0.7rem;" onclick="toggleGoal(${i})">${x.completed?"Geri Al":"Tamamla"}</button><button class="delete-btn" onclick="deleteGoal(${i})">❌</button></div></div>`).join("") || "Hedef yok";
         
+        // Portföy
         let portHtml = "";
         for(let [k,v] of Object.entries(currentUserData.portfolio)) {
             portHtml += `<div class="input-group"><label>${k} (₺)</label><input type="number" id="port_${k.replace(/\s/g,'')}" value="${v}"></div>`;
         }
         document.getElementById("portfolioInputs").innerHTML = portHtml;
         
+        // Birikim
         document.getElementById("currentSavings").value = currentUserData.currentSavings;
         document.getElementById("returnRate").value = currentUserData.returnRate;
         document.getElementById("monthlyExpenseEmergency").value = getTotalExpense();
         document.getElementById("emergencyCalc").innerHTML = convertCurrency(currentUserData.emergencyFund);
         
+        // Ayar
         document.getElementById("leanExpense").value = currentUserData.fireTargets.lean;
         document.getElementById("regularExpense").value = currentUserData.fireTargets.regular;
         document.getElementById("fatExpense").value = currentUserData.fireTargets.fat;
         document.getElementById("baristaExpense").value = currentUserData.fireTargets.barista;
         document.getElementById("withdrawalRate").value = currentUserData.withdrawalRate;
-        document.getElementById("inflationRate").value = currentUserData.inflationRate || 8;
+        document.getElementById("inflationRate").value = currentUserData.inflationRate;
         
         saveCurrentUserData();
     }
     
-    // Fonksiyonlar
+    // ============ TÜM FONKSİYONLAR ============
     function addIncome() { let ad=document.getElementById("gelirAd").value.trim(); let t=parseFloat(document.getElementById("gelirTutar").value); if(ad && t>0) { currentUserData.incomes.push({desc:ad, amount:t}); updateUI(); document.getElementById("gelirAd").value=""; document.getElementById("gelirTutar").value=""; } else alert("Geçerli gelir girin!"); }
     function addExpense() { let ad=document.getElementById("giderAd").value.trim(); let t=parseFloat(document.getElementById("giderTutar").value); if(ad && t>0) { currentUserData.expenses.push({desc:ad, amount:t}); updateUI(); document.getElementById("giderAd").value=""; document.getElementById("giderTutar").value=""; } else alert("Geçerli gider girin!"); }
     function deleteIncome(i) { currentUserData.incomes.splice(i,1); updateUI(); }
     function deleteExpense(i) { currentUserData.expenses.splice(i,1); updateUI(); }
-    function updatePassive() { currentUserData.passive={ rental:parseFloat(document.getElementById("rentalIncome").value)||0, dividend:parseFloat(document.getElementById("dividendIncome").value)||0, interest:parseFloat(document.getElementById("interestIncome").value)||0, digital:0, other:0 }; updateUI(); alert("Pasif gelir kaydedildi!"); }
+    function updatePassive() { currentUserData.passive={ rental:parseFloat(document.getElementById("rentalIncome").value)||0, dividend:parseFloat(document.getElementById("dividendIncome").value)||0, interest:parseFloat(document.getElementById("interestIncome").value)||0, digital:parseFloat(document.getElementById("digitalIncome").value)||0, other:0 }; updateUI(); alert("Pasif gelir kaydedildi!"); }
     function addDebt() { let n=document.getElementById("borcKisi").value.trim(); let a=parseFloat(document.getElementById("borcMiktar").value); if(n && a>0) { currentUserData.debts.push({name:n, amount:a}); updateUI(); document.getElementById("borcKisi").value=""; document.getElementById("borcMiktar").value=""; } else alert("Geçerli borç girin!"); }
     function addReceivable() { let n=document.getElementById("alacakKisi").value.trim(); let a=parseFloat(document.getElementById("alacakMiktar").value); if(n && a>0) { currentUserData.receivables.push({name:n, amount:a}); updateUI(); document.getElementById("alacakKisi").value=""; document.getElementById("alacakMiktar").value=""; } else alert("Geçerli alacak girin!"); }
     function deleteDebt(i) { currentUserData.debts.splice(i,1); updateUI(); }
@@ -688,7 +666,7 @@
     function updateSavings() { currentUserData.currentSavings=parseFloat(document.getElementById("currentSavings").value)||0; currentUserData.returnRate=parseFloat(document.getElementById("returnRate").value)||8; updateUI(); alert("Birikim güncellendi!"); }
     function updateEmergency() { let e=parseFloat(document.getElementById("monthlyExpenseEmergency").value)||0; currentUserData.emergencyFund=e*6; updateUI(); alert("Acil durum fonu: "+convertCurrency(currentUserData.emergencyFund)); }
     function updateFireTargets() { currentUserData.fireTargets.lean=parseFloat(document.getElementById("leanExpense").value)||15000; currentUserData.fireTargets.regular=parseFloat(document.getElementById("regularExpense").value)||30000; currentUserData.fireTargets.fat=parseFloat(document.getElementById("fatExpense").value)||60000; currentUserData.fireTargets.barista=parseFloat(document.getElementById("baristaExpense").value)||20000; currentUserData.withdrawalRate=parseFloat(document.getElementById("withdrawalRate").value)||4; currentUserData.inflationRate=parseFloat(document.getElementById("inflationRate").value)||8; updateUI(); alert("FIRE hedefleri güncellendi!"); }
-    function exportData() { let d=JSON.stringify(currentUserData); let b=new Blob([d],{type:"application/json"}); let u=URL.createObjectURL(b); let a=document.createElement('a'); a.href=u; a.download=`fire_data_${currentUser}.json`; a.click(); URL.revokeObjectURL(u); }
+    function exportData() { let d=JSON.stringify(currentUserData); let b=new Blob([d],{type:"application/json"}); let u=URL.createObjectURL(b); let a=document.createElement('a'); a.href=u; a.download=`fire_data_${currentUser}.json`; a.click(); URL.revokeObjectURL(u); alert("Veriler dışa aktarıldı!"); }
     function importData() { let f=document.getElementById('importFile').files[0]; if(!f) return; let r=new FileReader(); r.onload=function(e) { currentUserData=JSON.parse(e.target.result); updateUI(); alert("Veriler içe aktarıldı!"); }; r.readAsText(f); }
     function resetAllData() { if(confirm("Tüm veriler silinecek!")) { currentUserData=getDefaultUserData(); updateUI(); alert("Veriler sıfırlandı!"); } }
     
@@ -719,8 +697,6 @@
         currentUserData = null;
         document.getElementById("loginScreen").classList.remove("hidden");
         document.getElementById("mainApp").classList.add("hidden");
-        document.getElementById("loginEmail").value = "";
-        document.getElementById("loginPassword").value = "";
     }
     document.getElementById("logoutBtn")?.addEventListener("click", logout);
     
